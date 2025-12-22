@@ -1,0 +1,15 @@
+
+A. Thiết lập mạng song song (Parallel Topology)
+hánh 1 (n0, n1, n2): Tập trung về r_dt (Router DropTail).
+Nhánh 2 (n3, n4, n5): Tập trung về r_red (Router RED).
+Điểm đích: Cả hai nhánh đều kết nối về một svr (Main Server) duy nhất.
+B. Cơ chế vận chuyển có báo nhận (TCP SACK)
+Agent/TCP/Sack1: Thay vì chỉ gửi gói tin đi (như UDP), TCP Sack tạo ra một cuộc "đối thoại" giữa Client và Server.
+Quy trình: Khi Server nhận được gói tin, nó gửi lại một gói ACK (Acknowledge - Báo nhận). Nếu có gói bị mất trong 
+hàng đợi nghẽn, Server sẽ báo chính xác gói nào mất để Client gửi lại. Điều này thể hiện Cơ chế phục vụ tin cậy.
+C. Đa dạng hóa phân bổ lưu lượng (Traffic Distribution)
+Code không chỉ gửi dữ liệu đều đều mà mô phỏng 3 trạng thái của Internet thực tế:
+    FTP (Dữ liệu lớn): Luồng dữ liệu liên tục, chiếm dụng băng thông tối đa.
+    Exponential (Phân bổ Poisson): Mô phỏng các cuộc gọi VoIP hoặc yêu cầu HTTP, gói tin đến theo cụm ngẫu nhiên.
+    Pareto (Phân bổ Heavy-tail): Mô phỏng Video Streaming, có những giai đoạn bùng nổ dữ liệu cực lớn (bursts), 
+    dễ gây sốc cho hàng đợi.
